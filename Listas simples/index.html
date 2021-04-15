@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Link material icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Listas simples</title>
+</head>
+
+<body>
+
+    <div class="container section">
+        
+        <table class="striped">
+            <!-- Manejo de categorias en la tabla -->
+            <thead>
+                <!-- Insertar 1 fila con categorias -->
+                <tr>
+                    <th>Fuente</th>
+                    <th>Valor de los nodos</th>
+                </tr>
+            </thead>
+
+            <!-- Registros de la tabla -->
+            <tbody>
+                <!-- Fila 1: Muestra info de un sólo regístro-->
+                <tr>
+                    <td>
+                        <label>CARGAR VALORES POR DEFECTO</label>
+                    </td>
+                    <td>
+                        <output id="lista_default"></output>
+                    </td>
+                </tr>
+                <!-- Fila 2: Solicitar valores ingresados por el usuario -->
+                <tr>
+                    <td>
+                        <div class="input-field">
+                            <input type="text" name="nodos" id="nodos">
+                            <label for="nodos">Ingrese los valores separados por ","</label>
+                        </div>
+                    </td>
+                    <!-- Crear botón sin txt solo icon -->
+                    <td>
+                        <a class="btn-foalting btn-small waves-effect waves-light orange" onclick="capturaValorInput()">
+                            <i class="material-icons">add</i>
+                        </a>
+                        <output id="nodos_ingresados"></output>
+                    </td>
+                </tr>
+                <!-- Fila 3 -->
+                <tr>
+                    <td>
+                        <!-- Crear botón para el cargue de múltiples imágenes -->
+                        <div class="file-field input-field">
+                            <div class="btn orange">
+                                <span>Cargar imágenes</span>
+                                <input type="file" name="files[]" id="files" multiple>
+                            </div>
+                            <!-- Muestra el nombre de las imágenes seleccionadas -->
+                            <div class="file-path-wrapper">
+                                <input type="text" class="file-path validate" id="nombre_img">
+                            </div>
+                            
+                        </div>
+                    </td>
+
+                    <td>
+                        <output id="lista"></output>
+                    </td>
+
+                </tr>
+                <!-- Fila 4 -->
+                <tr>
+                    <td>
+                        <div class="center file-field input-field">
+                            <div class="btn orange">
+                                <span>Cargar txt</span>
+                                <input type="file" id="myInput">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <label>Contenido del archivo</label>
+                        <output id="ver_txt"></output>
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+
+        <!-- Sección botón -->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light orange" onclick="crearLista()">Crear lista</button>
+                </div>
+            </div>
+        </div>
+
+        <table class="striped">
+            <thead>
+                <!-- Insertar 1 fila con categorias -->
+                <tr>
+                    <th>Esta es la lista que creaste</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div class="row">
+                    <tr>
+                        <td>
+                            <div class="col s12"></div>
+                            <!-- Output para crear la lista -->
+                            <output id="crear_lista"></output>
+                        </td>
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+
+        <table class="striped">
+            <thead>
+                <!-- Insertar 1 fila con categorias -->
+                <tr>
+                    <th>Esta es la lista con tus modificaciónes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div class="row">
+                    <tr>
+                        <td>
+                            <!-- Output para crear la lista resultante -->
+                            <output id="lista_resultante"></output>
+                        </td>
+                    </tr> 
+                </div>
+            </tbody>
+        </table>
+
+        
+        
+        <!-- Lista desplegable -->
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <select class="browser-default" name="selector_nodos" id="selector_nodos">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="1">Añadir nodo</option> <!-- Radio buton para saber si al final o inicio de lista -->
+                        <option value="2">Eliminar nodo</option>
+                        <option value="3">Consultar valor de nodo en una posición</option>
+                        <option value="4">Eliminar nodo por determinada posición</option>
+                        <option value="5">Eliminar nodo por valor</option>
+                        <option value="6">Modificar valor de un nodo determinado</option>
+                        <option value="7">Añadir nodo en determinada posición</option>
+                        <option value="8">Invertir orden de la lista</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s6">
+                    <label>
+                        <input name="group1" type="radio" checked id="agregar_inicio" /><!-- inicio -->
+                        <span>Al inicio de la lista</span>
+                    </label>
+                </div>
+                <div class="col s6">
+                     <label>
+                            <input name="group1" type="radio" checked id="agregar_final" /><!-- Final -->
+                            <span>Al final de la lista</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row center">
+                <div class="col s12">
+                    <label>
+                        <h6>
+                           Agrega un valor y escoge la posición 
+                        </h6>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row center">
+                <!-- Parámetros métodos listas simples -->
+                <div class="col s8">
+                    <input type="text" name="valor_n" id="valor_n">
+                    <label for="valor_n">Valor nodo</label>
+                </div>
+                <div class="col s4">
+                    <input type="number" name="posicion_n" id="posicion_n" min="0" >
+                    <label for="posicion_n">Posición nodo</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de aceptar y mostra lista resultante -->
+        <!-- Sección botón -->
+        <div class="section ">
+            <div class="row center">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light orange" onclick="mostrarLista()">Ver lista resultante</button>
+                </div>
+            </div>
+        </div>
+            
+
+    </div>
+    
+</body>
+<script src="JS/listasEnlazadas.js"></script>
+</html>
